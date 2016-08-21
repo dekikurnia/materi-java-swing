@@ -73,51 +73,57 @@
 				<text><![CDATA[Nama Karyawan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="253" y="7" width="134" height="20" uuid="dd2b5cef-953a-4d11-ab2e-99c9b32481e4"/>
+				<reportElement x="294" y="7" width="134" height="20" uuid="dd2b5cef-953a-4d11-ab2e-99c9b32481e4"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[Alamat]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="407" y="7" width="134" height="20" uuid="04b1c2a3-d5cb-4de4-88bc-585ad08c5546"/>
+				<reportElement x="447" y="7" width="104" height="20" uuid="04b1c2a3-d5cb-4de4-88bc-585ad08c5546"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[Telepon]]></text>
 			</staticText>
+			<line>
+				<reportElement x="12" y="26" width="539" height="1" uuid="b81383a2-89a7-404d-bcff-5868450bd790"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="10" y="0" width="99" height="20" uuid="bbc37af1-c5d3-4f32-a701-fc16df0c7865"/>
+				<reportElement x="10" y="3" width="99" height="20" uuid="bbc37af1-c5d3-4f32-a701-fc16df0c7865"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nik}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="109" y="0" width="134" height="20" uuid="44774137-4c80-4e80-82f8-4c8f532413d3"/>
+				<reportElement x="109" y="3" width="185" height="20" uuid="44774137-4c80-4e80-82f8-4c8f532413d3"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{namaKaryawan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="253" y="0" width="175" height="20" uuid="7e2b33a6-8f30-472e-b46c-3b46e78d7b68"/>
+				<reportElement x="294" y="3" width="175" height="20" uuid="7e2b33a6-8f30-472e-b46c-3b46e78d7b68"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{alamatKaryawan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="407" y="0" width="134" height="20" uuid="cdf8b177-826d-430a-93ee-833cfeb31c09"/>
+				<reportElement x="447" y="3" width="108" height="20" uuid="cdf8b177-826d-430a-93ee-833cfeb31c09"/>
 				<textElement>
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{telpKaryawan}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="12" y="19" width="539" height="1" uuid="b0d5f587-968b-4720-8d8a-b059a6ce50ed"/>
+			</line>
 		</band>
 	</detail>
 	<columnFooter>

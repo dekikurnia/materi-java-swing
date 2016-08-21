@@ -6,7 +6,7 @@
 package com.dekikurnia.rentalmobil.ui.master;
 
 import com.dekikurnia.rentalmobil.Main;
-import com.dekikurnia.rentalmobil.model.Karyawan;
+import com.dekikurnia.rentalmobil.model.Pelanggan;
 import com.dekikurnia.rentalmobil.ui.main.FrameUtama;
 import hauw.widget.TableHeaderRenderer;
 import java.awt.event.ActionEvent;
@@ -28,15 +28,15 @@ import javax.swing.table.TableRowSorter;
  *
  * @author deki kurnia
  */
-public class KaryawanPanel extends javax.swing.JInternalFrame {
+public class PelangganPanel extends javax.swing.JInternalFrame {
     
-    private List<Karyawan> listKaryawan;
-    private Karyawan karyawan;
+    private List<Pelanggan> listPelanggan;
+    private Pelanggan pelanggan;
     private TableRowSorter sorter;
     /**
-     * Creates new form KaryawanPanel
+     * Creates new form PelangganPanel
      */
-    public KaryawanPanel() {
+    public PelangganPanel() {
         initComponents();
         refreshTable();
         initVars();
@@ -45,11 +45,11 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
     }
     
     private boolean validateForm() {
-        if (textNIK.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(this, "NIK tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
+        if (textKtp.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "No Ktp tidak boleh kosong", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (textNama.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(this, "Nama karyawan tidak boleh kosong!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Nama pelanggan tidak boleh kosong!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (textAlamat.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Alamat tidak boleh kosong!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -63,27 +63,27 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
     
     private void clearForm() {
         textAlamat.setText("");
-        textNIK.setText("");
+        textKtp.setText("");
         textNama.setText("");
         textTelepon.setText("");
     }
     
     private void refreshTable() {
-        listKaryawan = Main.getKaryawanService().getKaryawan();
-        tableKaryawan.setModel(new KaryawanTableModel(listKaryawan));
-        for (int i = 0; i < tableKaryawan.getColumnCount(); i++) {
-            tableKaryawan.getColumnModel().getColumn(i).setHeaderRenderer(new TableHeaderRenderer());
+        listPelanggan = Main.getPelangganService().getPelanggan();
+        tablePelanggan.setModel(new PelangganTableModel(listPelanggan));
+        for (int i = 0; i < tablePelanggan.getColumnCount(); i++) {
+            tablePelanggan.getColumnModel().getColumn(i).setHeaderRenderer(new TableHeaderRenderer());
         }
 
     }
     
     private void initVars() {
-        sorter = new TableRowSorter(tableKaryawan.getModel());
-        tableKaryawan.setRowSorter(sorter);
+        sorter = new TableRowSorter(tablePelanggan.getModel());
+        tablePelanggan.setRowSorter(sorter);
     }
 
     private void enableForm(boolean status) {
-        textNIK.setEnabled(status);
+        textKtp.setEnabled(status);
         textNama.setEnabled(status);
         textAlamat.setEnabled(status);
         textTelepon.setEnabled(status);
@@ -102,38 +102,38 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
     private void kondisiUbahOrHapus() {
         toolbarPanel.kondisiUbahOrHapus();
         enableForm(true);
-        textNIK.setEnabled(false);
+        textKtp.setEnabled(false);
     }
 
     private void loadModelToForm() {
-        if (karyawan != null) {
-            textNIK.setText(karyawan.getNik());
-            textNama.setText(karyawan.getNamaKaryawan());
-            textAlamat.setText(karyawan.getAlamatKaryawan());
-            textTelepon.setText(karyawan.getTelpKaryawan());
+        if (pelanggan != null) {
+            textKtp.setText(pelanggan.getNoKtp());
+            textNama.setText(pelanggan.getNamaPelanggan());
+            textAlamat.setText(pelanggan.getAlamatPelanggan());
+            textTelepon.setText(pelanggan.getTelpPelanggan());
         }
     }
 
-    private Karyawan loadFormToModel() {
-        Karyawan k = new Karyawan();
-        k.setNik(textNIK.getText());
-        k.setNamaKaryawan(textNama.getText());
-        k.setAlamatKaryawan(textAlamat.getText());
-        k.setTelpKaryawan(textTelepon.getText());
-        return k;
+    private Pelanggan loadFormToModel() {
+        Pelanggan p = new Pelanggan();
+        p.setNoKtp(textKtp.getText());
+        p.setNamaPelanggan(textNama.getText());
+        p.setAlamatPelanggan(textAlamat.getText());
+        p.setTelpPelanggan(textTelepon.getText());
+        return p;
     }
     
      private void initListeners() {
-        tableKaryawan.getSelectionModel().addListSelectionListener(new KaryawanSelectionListener());
+        tablePelanggan.getSelectionModel().addListSelectionListener(new PelangganSelectionListener());
 
         toolbarPanel.getButtonTambah().addActionListener((ActionEvent e) -> {
             kondisiSimpan();
-            textNIK.requestFocusInWindow();
+            textKtp.requestFocusInWindow();
         });
 
         toolbarPanel.getButtonSimpan().addActionListener((ActionEvent e) -> {
             if (validateForm()) {
-                Main.getKaryawanService().save(loadFormToModel());
+                Main.getPelangganService().save(loadFormToModel());
                 refreshTable();
                 clearForm();
                 kondisiAwal();
@@ -145,17 +145,18 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog.setDefaultLookAndFeelDecorated(true);
-                int response = JOptionPane.showConfirmDialog(null, "Anda yakin ingin menghapus data ini ?", "Konfirmasi",
+                int response = JOptionPane.showConfirmDialog(null, 
+                        "Anda yakin ingin menghapus data ini ?", "Konfirmasi",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.NO_OPTION) {
                     JOptionPane.getRootFrame().dispose(); 
                 } else if (response == JOptionPane.YES_OPTION) {
-                    if (karyawan != null) {
-                    Main.getKaryawanService().delete(karyawan);
+                    if (pelanggan != null) {
+                    Main.getPelangganService().delete(pelanggan);
                     refreshTable();
                     clearForm();
                     kondisiAwal();
-                    tableKaryawan.clearSelection();
+                    tablePelanggan.clearSelection();
                 }
                 } 
             }
@@ -166,11 +167,11 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validateForm()) {
-                    Main.getKaryawanService().update(loadFormToModel());
+                    Main.getPelangganService().update(loadFormToModel());
                     refreshTable();
                     clearForm();
                     kondisiAwal();
-                    tableKaryawan.clearSelection();
+                    tablePelanggan.clearSelection();
                 }
             }
         });
@@ -181,7 +182,7 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 kondisiAwal();
                 clearForm();
-                tableKaryawan.clearSelection();
+                tablePelanggan.clearSelection();
             }
         });
         
@@ -237,13 +238,13 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableKaryawan = new javax.swing.JTable();
+        tablePelanggan = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         textNama = new javax.swing.JTextField();
-        textNIK = new javax.swing.JTextField();
+        textKtp = new javax.swing.JTextField();
         textTelepon = new javax.swing.JTextField();
         textAlamat = new javax.swing.JTextField();
         toolbarPanel = new com.dekikurnia.rentalmobil.ui.toolbar.MasterToolbar();
@@ -272,9 +273,9 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
             }
         });
 
-        tableKaryawan.setAutoCreateRowSorter(true);
-        tableKaryawan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableKaryawan.setModel(new javax.swing.table.DefaultTableModel(
+        tablePelanggan.setAutoCreateRowSorter(true);
+        tablePelanggan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tablePelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -285,10 +286,10 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tableKaryawan);
+        jScrollPane1.setViewportView(tablePelanggan);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("NIK");
+        jLabel1.setText("No Ktp");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Cari");
@@ -301,7 +302,7 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
 
         textNama.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        textNIK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        textKtp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         textTelepon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textTelepon.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -313,7 +314,7 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
         textAlamat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Nama Karyawan");
+        jLabel5.setText("Nama Pelanggan");
 
         textCari.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -337,10 +338,10 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
                             .addComponent(textAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(textNIK, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textKtp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(136, 136, 136)
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(textCari, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
@@ -354,7 +355,7 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(textNIK, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textKtp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(textCari, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -388,7 +389,7 @@ if (telepon.length()>13)
     }//GEN-LAST:event_textTeleponKeyReleased
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        FrameUtama.karyawanPanel = null;
+        FrameUtama.pelangganPanel = null;
         dispose();
     }//GEN-LAST:event_formInternalFrameClosing
 
@@ -400,26 +401,26 @@ if (telepon.length()>13)
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableKaryawan;
+    private javax.swing.JTable tablePelanggan;
     private javax.swing.JTextField textAlamat;
     private javax.swing.JTextField textCari;
-    private javax.swing.JTextField textNIK;
+    private javax.swing.JTextField textKtp;
     private javax.swing.JTextField textNama;
     private javax.swing.JTextField textTelepon;
     private com.dekikurnia.rentalmobil.ui.toolbar.MasterToolbar toolbarPanel;
     // End of variables declaration//GEN-END:variables
 
    
-    private class KaryawanTableModel extends AbstractTableModel {
+    private class PelangganTableModel extends AbstractTableModel {
 
-        private List<Karyawan> rows;
+        private List<Pelanggan> rows;
         private List<String> columns;
 
-        public KaryawanTableModel(List<Karyawan> rows) {
+        public PelangganTableModel(List<Pelanggan> rows) {
             this.rows = rows;
             columns = new ArrayList<String>();
-            columns.add("NIK");
-            columns.add("Nama Karyawan");
+            columns.add("No Ktp");
+            columns.add("Nama Pelanggan");
             columns.add("Alamat");
             columns.add("Telepon");
         }
@@ -443,27 +444,27 @@ if (telepon.length()>13)
         public Object getValueAt(int rowIndex, int columnIndex) {
             switch (columnIndex) {
                 case 0:
-                    return rows.get(rowIndex).getNik();
+                    return rows.get(rowIndex).getNoKtp();
                 case 1:
-                    return rows.get(rowIndex).getNamaKaryawan();
+                    return rows.get(rowIndex).getNamaPelanggan();
                 case 2:
-                    return rows.get(rowIndex).getAlamatKaryawan();
+                    return rows.get(rowIndex).getAlamatPelanggan();
                 case 3:
-                    return rows.get(rowIndex).getTelpKaryawan();
+                    return rows.get(rowIndex).getTelpPelanggan();
                 default:
                     return "";
             }
         }
     }
 
-    private class KaryawanSelectionListener implements ListSelectionListener {
+    private class PelangganSelectionListener implements ListSelectionListener {
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            int index = tableKaryawan.getSelectedRow();
+            int index = tablePelanggan.getSelectedRow();
             if (index >= 0) {
                 kondisiUbahOrHapus();
-                karyawan= listKaryawan.get(index);
+                pelanggan= listPelanggan.get(index);
                 loadModelToForm();
             }
         }

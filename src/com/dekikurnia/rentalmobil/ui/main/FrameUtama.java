@@ -8,24 +8,14 @@ package com.dekikurnia.rentalmobil.ui.main;
 import com.dekikurnia.rentalmobil.model.Role;
 import com.dekikurnia.rentalmobil.model.User;
 import com.dekikurnia.rentalmobil.ui.master.KaryawanPanel;
+import com.dekikurnia.rentalmobil.ui.master.PelangganPanel;
 import com.dekikurnia.rentalmobil.ui.report.KaryawanReportPanel;
 import com.dekikurnia.rentalmobil.ui.security.LoginDialog;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -34,6 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class FrameUtama extends javax.swing.JFrame {
     public static KaryawanReportPanel karyawanReportPanel;
     public static KaryawanPanel karyawanPanel;
+    public static PelangganPanel pelangganPanel;
     JasperReport jasperReport;
 
     /**
@@ -52,11 +43,12 @@ public class FrameUtama extends javax.swing.JFrame {
     
     private void constructMenu(User user) {
         if (user.getRole() == Role.PEGAWAI) {
-            menuTransaksi.setEnabled(false);
+            menuMaster.setEnabled(false);
             menuLaporan.setEnabled(false);
         } else if (user.getRole() == Role.ADMIN) {
             menuTransaksi.setEnabled(true);
             menuLaporan.setEnabled(true);
+            menuMaster.setEnabled(true);
         }
     }
 
@@ -71,17 +63,18 @@ public class FrameUtama extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         desktopPane = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuLogout = new javax.swing.JMenuItem();
         menuKeluar = new javax.swing.JMenuItem();
         menuMaster = new javax.swing.JMenu();
         menuKaryawan = new javax.swing.JMenuItem();
+        menuPelanggan = new javax.swing.JMenuItem();
         menuTransaksi = new javax.swing.JMenu();
         menuPenyewaan = new javax.swing.JMenuItem();
         menuLaporan = new javax.swing.JMenu();
         dataKaryawan = new javax.swing.JMenuItem();
-        dataUser = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -98,15 +91,30 @@ public class FrameUtama extends javax.swing.JFrame {
 
         desktopPane.setBackground(new java.awt.Color(204, 212, 209));
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 26, Short.MAX_VALUE)
+        );
+
+        desktopPane.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPaneLayout.createSequentialGroup()
+                .addGap(0, 254, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
@@ -149,6 +157,15 @@ public class FrameUtama extends javax.swing.JFrame {
         });
         menuMaster.add(menuKaryawan);
 
+        menuPelanggan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuPelanggan.setText("Pelanggan");
+        menuPelanggan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPelangganActionPerformed(evt);
+            }
+        });
+        menuMaster.add(menuPelanggan);
+
         menuBar.add(menuMaster);
 
         menuTransaksi.setBackground(new java.awt.Color(51, 51, 255));
@@ -175,15 +192,6 @@ public class FrameUtama extends javax.swing.JFrame {
             }
         });
         menuLaporan.add(dataKaryawan);
-
-        dataUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        dataUser.setText("Data User");
-        dataUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataUserActionPerformed(evt);
-            }
-        });
-        menuLaporan.add(dataUser);
 
         menuBar.add(menuLaporan);
 
@@ -214,7 +222,7 @@ public class FrameUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_menuKaryawanActionPerformed
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
-        karyawanPanel = null;
+        pelangganPanel = null;
         karyawanReportPanel = null;
         desktopPane.removeAll();
         desktopPane.updateUI();
@@ -240,9 +248,26 @@ public class FrameUtama extends javax.swing.JFrame {
         
     }//GEN-LAST:event_dataKaryawanActionPerformed
 
-    private void dataUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataUserActionPerformed
-        
-    }//GEN-LAST:event_dataUserActionPerformed
+    private void menuPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPelangganActionPerformed
+        try {
+            // TODO add your handling code here:
+            if(pelangganPanel == null) {
+                pelangganPanel = new PelangganPanel();
+                desktopPane.add(pelangganPanel);
+            } else {
+                pelangganPanel.toFront();
+            }
+            Dimension desktopSize = desktopPane.getSize();
+            Dimension jInternalFrameSize = pelangganPanel.getSize();
+            pelangganPanel.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
+            (desktopSize.height- jInternalFrameSize.height)/2);
+            pelangganPanel.setSelected(true);
+            pelangganPanel.setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(FrameUtama.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+    }//GEN-LAST:event_menuPelangganActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,16 +276,17 @@ public class FrameUtama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem dataKaryawan;
-    private javax.swing.JMenuItem dataUser;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuKaryawan;
     private javax.swing.JMenuItem menuKeluar;
     private javax.swing.JMenu menuLaporan;
     private javax.swing.JMenuItem menuLogout;
     private javax.swing.JMenu menuMaster;
+    private javax.swing.JMenuItem menuPelanggan;
     private javax.swing.JMenuItem menuPenyewaan;
     private javax.swing.JMenu menuTransaksi;
     // End of variables declaration//GEN-END:variables

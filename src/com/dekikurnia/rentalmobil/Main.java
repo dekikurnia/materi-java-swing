@@ -6,6 +6,7 @@
 package com.dekikurnia.rentalmobil;
 
 import com.dekikurnia.rentalmobil.service.KaryawanService;
+import com.dekikurnia.rentalmobil.service.PelangganService;
 import com.dekikurnia.rentalmobil.service.ReportService;
 import com.dekikurnia.rentalmobil.service.UserService;
 import com.dekikurnia.rentalmobil.ui.main.FrameUtama;
@@ -27,6 +28,7 @@ public class Main {
     
     private static FrameUtama frameUtama;
     private static KaryawanService karyawanService;
+    private static PelangganService pelangganService;
     private static UserService userService;
     private static ReportService reportService;
 
@@ -36,6 +38,10 @@ public class Main {
     
     public static KaryawanService getKaryawanService() {
         return karyawanService;
+    }
+    
+    public static PelangganService getPelangganService() {
+        return pelangganService;
     }
      
     public static FrameUtama getFrameUtama() {
@@ -67,6 +73,9 @@ public class Main {
                 
                 karyawanService = new KaryawanService();
                 karyawanService.setDataSource(dataSource);
+                
+                pelangganService = new PelangganService();
+                pelangganService.setDataSource(dataSource);
                 
                 userService = new UserService();
                 userService.setDataSource(dataSource);
