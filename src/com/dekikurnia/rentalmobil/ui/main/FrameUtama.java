@@ -96,25 +96,29 @@ public class FrameUtama extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        desktopPane.setBackground(new java.awt.Color(255, 255, 255));
+        desktopPane.setBackground(new java.awt.Color(204, 212, 209));
 
         javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 904, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         getContentPane().add(desktopPane, java.awt.BorderLayout.CENTER);
 
+        menuBar.setBackground(new java.awt.Color(51, 51, 255));
+        menuBar.setBorder(null);
         menuBar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        jMenu1.setBackground(new java.awt.Color(51, 51, 255));
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
         jMenu1.setText("File");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuLogout.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuLogout.setText("Logout");
@@ -131,8 +135,10 @@ public class FrameUtama extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
+        menuMaster.setBackground(new java.awt.Color(51, 51, 255));
+        menuMaster.setForeground(new java.awt.Color(255, 255, 255));
         menuMaster.setText("Master");
-        menuMaster.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuMaster.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuKaryawan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuKaryawan.setText("Karyawan");
@@ -145,8 +151,10 @@ public class FrameUtama extends javax.swing.JFrame {
 
         menuBar.add(menuMaster);
 
+        menuTransaksi.setBackground(new java.awt.Color(51, 51, 255));
+        menuTransaksi.setForeground(new java.awt.Color(255, 255, 255));
         menuTransaksi.setText("Transaksi");
-        menuTransaksi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuTransaksi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuPenyewaan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuPenyewaan.setText("Penyewaan");
@@ -154,8 +162,10 @@ public class FrameUtama extends javax.swing.JFrame {
 
         menuBar.add(menuTransaksi);
 
+        menuLaporan.setBackground(new java.awt.Color(51, 51, 255));
+        menuLaporan.setForeground(new java.awt.Color(255, 255, 255));
         menuLaporan.setText("Laporan");
-        menuLaporan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuLaporan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         dataKaryawan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         dataKaryawan.setText("Data Karyawan");

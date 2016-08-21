@@ -24,8 +24,8 @@
 	<title>
 		<band height="60" splitType="Stretch">
 			<staticText>
-				<reportElement x="-29" y="17" width="182" height="21" uuid="c5cccf0b-7fa9-48f6-8152-93748235f7f4"/>
-				<textElement textAlignment="Center">
+				<reportElement x="186" y="16" width="182" height="40" uuid="c5cccf0b-7fa9-48f6-8152-93748235f7f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data Karyawan]]></text>
@@ -33,12 +33,23 @@
 			<line>
 				<reportElement x="12" y="56" width="543" height="1" uuid="74782dee-74e8-4bbc-8438-6663af9e0384"/>
 			</line>
-			<staticText>
-				<reportElement x="2" y="38" width="128" height="19" uuid="1913585e-0a2b-4aa6-ac8b-5f6fd7351304"/>
-				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="12"/>
+			<image>
+				<reportElement x="407" y="16" width="144" height="40" uuid="3b63e1a4-f17a-49cb-bb8c-6a3fa454b537"/>
+				<imageExpression><![CDATA["C:\\Users\\deki kurnia\\Desktop\\logo rental mobil.jpg"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="89" y="36" width="108" height="20" uuid="454723f2-91c1-4c5d-8c46-2f02ebe4f522"/>
+				<textElement>
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CV. Berkah Otomotif]]></text>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="36" width="79" height="20" uuid="2df17f4f-6d84-4baa-9a19-55b067b38fbe"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Cetak: ]]></text>
 			</staticText>
 		</band>
 	</title>

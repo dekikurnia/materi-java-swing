@@ -9,16 +9,19 @@ import com.dekikurnia.rentalmobil.Main;
 import com.dekikurnia.rentalmobil.ui.main.FrameUtama;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -37,13 +40,9 @@ public class KaryawanReportPanel extends javax.swing.JInternalFrame {
     private void showReport() {
         reportPanel.removeAll();
         JasperPrint print = Main.getReportService().getReportKaryawan();
-        JasperViewer viewer = new JasperViewer(print);
+        JRViewer viewer = new JRViewer(print);
         viewer.setSize(reportPanel.getSize());
-        //JasperViewer.viewReport(print, true
-        Container container = viewer.getContentPane();
-        reportPanel.setLayout(new BorderLayout());
-        reportPanel.add(container);
-        //reportPanel.add(viewer, BorderLayout.CENTER);
+        reportPanel.add(viewer, BorderLayout.CENTER);
         reportPanel.updateUI();
     }
     
@@ -83,17 +82,7 @@ public class KaryawanReportPanel extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout reportPanelLayout = new javax.swing.GroupLayout(reportPanel);
-        reportPanel.setLayout(reportPanelLayout);
-        reportPanelLayout.setHorizontalGroup(
-            reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
-        );
-        reportPanelLayout.setVerticalGroup(
-            reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
-        );
-
+        reportPanel.setLayout(new java.awt.BorderLayout());
         getContentPane().add(reportPanel, java.awt.BorderLayout.CENTER);
 
         getAccessibleContext().setAccessibleDescription("");

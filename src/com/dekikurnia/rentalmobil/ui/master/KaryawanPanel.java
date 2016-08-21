@@ -265,6 +265,7 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
         });
 
         tableKaryawan.setAutoCreateRowSorter(true);
+        tableKaryawan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tableKaryawan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -290,14 +291,23 @@ public class KaryawanPanel extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Telepon");
 
+        textNama.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        textNIK.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        textTelepon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textTelepon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textTeleponKeyReleased(evt);
             }
         });
 
+        textAlamat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Nama Karyawan");
+
+        textCari.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -84,15 +84,15 @@ public class LoginDialog extends javax.swing.JDialog {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
         jLabel2.setText("Username");
 
-        Password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Password.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
         Password.setText("Password");
 
-        textUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        textUsername.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
 
-        buttonBatal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonBatal.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
         buttonBatal.setText("Batal");
         buttonBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,7 @@ public class LoginDialog extends javax.swing.JDialog {
             }
         });
 
-        buttonLogin1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buttonLogin1.setFont(new java.awt.Font("Tekton Pro Ext", 1, 14)); // NOI18N
         buttonLogin1.setText("Login");
         buttonLogin1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class LoginDialog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 255));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Masukkan Username dan Password anda untuk Login");
 
@@ -131,7 +131,7 @@ public class LoginDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        textPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        textPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         textPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPasswordActionPerformed(evt);
@@ -151,7 +151,7 @@ public class LoginDialog extends javax.swing.JDialog {
                     .addComponent(Password))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonBatal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
